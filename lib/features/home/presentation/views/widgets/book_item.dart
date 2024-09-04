@@ -14,7 +14,7 @@ class BookItem extends StatelessWidget {
         aspectRatio: 2.8 / 4,
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(16),
               image: DecorationImage(
                   image: Image.asset(Assets.test).image, fit: BoxFit.fill)),
         ),
