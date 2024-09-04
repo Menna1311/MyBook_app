@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_books_app/core/utils/styles.dart';
 import 'package:my_books_app/features/home/presentation/views/widgets/best_seller_item.dart';
+import 'package:my_books_app/features/home/presentation/views/widgets/bestseller_listview.dart';
 import 'package:my_books_app/features/home/presentation/views/widgets/book_item_listview.dart';
 import 'package:my_books_app/features/home/presentation/views/widgets/custom_appbar.dart';
 
@@ -35,19 +36,8 @@ class HomeViewBody extends StatelessWidget {
               height: 20,
             ),
           ),
-          SliverToBoxAdapter(
-            child: ListView.builder(
-              padding: EdgeInsets.zero,
-              itemCount: 10,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return const Padding(
-                  padding: EdgeInsets.only(bottom: 16.0),
-                  child: BestSellerItem(),
-                );
-              },
-            ),
+          SliverFillRemaining(
+            child: BestSellerListView(),
           )
         ],
       ),
