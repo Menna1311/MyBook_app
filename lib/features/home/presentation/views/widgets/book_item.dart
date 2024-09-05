@@ -8,16 +8,13 @@ class BookItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.25,
-      child: AspectRatio(
-        aspectRatio: 2.8 / 4,
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              image: DecorationImage(
-                  image: Image.asset(Assets.test).image, fit: BoxFit.fill)),
-        ),
+    return AspectRatio(
+      aspectRatio: 2.8 / 4,
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            image: DecorationImage(
+                image: Image.asset(Assets.test).image, fit: BoxFit.fill)),
       ),
     );
   }
