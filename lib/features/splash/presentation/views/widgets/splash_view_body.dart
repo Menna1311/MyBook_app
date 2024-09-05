@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+import 'package:my_books_app/core/utils/app_routes.dart';
 import 'package:my_books_app/core/utils/assets.dart';
-import 'package:my_books_app/features/home/presentation/views/home_view.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -15,7 +15,8 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-      Get.to(() => const HomeView(), transition: Transition.fade);
+      // Get.to(() => const HomeView(), transition: Transition.fade);
+      GoRouter.of(context).push(AppRoutes.home);
     });
   }
 
