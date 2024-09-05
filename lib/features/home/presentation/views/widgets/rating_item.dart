@@ -5,12 +5,14 @@ import 'package:my_books_app/core/utils/styles.dart';
 class RatingItem extends StatelessWidget {
   const RatingItem({
     super.key,
+    this.mainAxisAlignment = MainAxisAlignment.start,
   });
-
+  final MainAxisAlignment mainAxisAlignment;
   @override
   Widget build(BuildContext context) {
-    return const Row(
-      children: [
+    return Row(
+      mainAxisAlignment: mainAxisAlignment,
+      children: const [
         Icon(
           FontAwesomeIcons.solidStar,
           color: Colors.amber,
