@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:my_books_app/core/widgets/custom_error.dart';
 import 'package:my_books_app/features/home/presentation/manager/featured_books_cubit/featured_books_cubit.dart';
 import 'package:my_books_app/features/home/presentation/views/widgets/book_item.dart';
@@ -32,7 +33,9 @@ class BookItemListView extends StatelessWidget {
       } else if (state is FeaturedBooksFAilure) {
         return CustomErrorWidget(errMessage: state.errMessage);
       } else {
-        return CircularProgressIndicator();
+        return SpinKitPouringHourGlassRefined(
+          color: Colors.yellow,
+        );
       }
     });
   }
