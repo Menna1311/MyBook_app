@@ -6,8 +6,10 @@ import 'package:my_books_app/cosntant.dart';
 import 'package:my_books_app/features/home/data/models/book_model/repos/home_repo_impl.dart';
 import 'package:my_books_app/features/home/presentation/manager/featured_books_cubit/featured_books_cubit.dart';
 import 'package:my_books_app/features/home/presentation/manager/newest_books_cubit/newestbooks_cubit.dart';
+import 'package:my_books_app/simple_bloc_observer.dart';
 
 void main() {
+  Bloc.observer = MyBlocObserver();
   setupLocator();
   runApp(const MyBook());
 }
@@ -22,13 +24,12 @@ class MyBook extends StatelessWidget {
         BlocProvider(
           create: (context) => FeaturedBooksCubit(
             getit.get<HomeRepoImpl>(),
-          ),
+          )..fetchFeaturedBooks(),
         ),
         BlocProvider(
-          create: (context) => NewestbooksCubit(
-            getit.get<HomeRepoImpl>(),
-          ),
-        ),
+            create: (context) => NewestbooksCubit(
+                  getit.get<HomeRepoImpl>(),
+                ))
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
