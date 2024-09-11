@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_books_app/core/utils/app_routes.dart';
-import 'package:my_books_app/core/utils/assets.dart';
 import 'package:my_books_app/core/utils/styles.dart';
+import 'package:my_books_app/features/home/data/models/book_model/book_model.dart';
+import 'package:my_books_app/features/home/presentation/views/widgets/book_item.dart';
 import 'package:my_books_app/features/home/presentation/views/widgets/rating_item.dart';
 
 class BestSellerItem extends StatelessWidget {
   const BestSellerItem({
     super.key,
+    required this.book,
   });
-
+  final BookModel book;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -20,16 +22,7 @@ class BestSellerItem extends StatelessWidget {
         children: [
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.15,
-            child: AspectRatio(
-              aspectRatio: 2.8 / 4,
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    image: DecorationImage(
-                        image: Image.asset(Assets.test).image,
-                        fit: BoxFit.fill)),
-              ),
-            ),
+            child: BookItem(imageUrl: book.volumeInfo.imageLinks.thumbnail),
           ),
           const SizedBox(
             width: 30,
@@ -40,21 +33,24 @@ class BestSellerItem extends StatelessWidget {
               children: [
                 SizedBox(
                   width: MediaQuery.of(context).size.height * 0.3,
-                  child: const Text('Harry Potter and the order of the phoenix',
+                  child: Text(book.volumeInfo.title ?? 'no title',
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       style: Styles.textStyle20),
                 ),
-                const Text('the author', style: Styles.textStyle14),
+                Text(book.volumeInfo.authors?[0] ?? 'no author',
+                    style: Styles.textStyle14),
                 Row(
                   children: [
                     Text(
-                      '19.99 €',
+                      'Free',
                       style: Styles.textStyle20
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
                     const Spacer(),
-                    const RatingItem()
+                    RatingItem(
+                        rating: book.volumeInfo.averageRating ?? 0,
+                        count: book.volumeInfo.ratingsCount ?? 0),
                   ],
                 )
               ],

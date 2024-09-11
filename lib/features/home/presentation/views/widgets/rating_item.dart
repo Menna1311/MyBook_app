@@ -6,13 +6,17 @@ class RatingItem extends StatelessWidget {
   const RatingItem({
     super.key,
     this.mainAxisAlignment = MainAxisAlignment.start,
+    required this.rating,
+    required this.count,
   });
   final MainAxisAlignment mainAxisAlignment;
+  final num rating;
+  final int count;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: mainAxisAlignment,
-      children: const [
+      children: [
         Icon(
           FontAwesomeIcons.solidStar,
           color: Colors.amber,
@@ -20,8 +24,8 @@ class RatingItem extends StatelessWidget {
         SizedBox(
           width: 4,
         ),
-        Text('4.5', style: Styles.textStyle14),
-        Text('(345)')
+        Text(rating.toString(), style: Styles.textStyle14),
+        Text('($count)', style: Styles.textStyle14),
       ],
     );
   }
