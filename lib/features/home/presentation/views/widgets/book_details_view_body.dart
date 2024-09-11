@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:my_books_app/core/utils/styles.dart';
+import 'package:my_books_app/features/home/data/models/book_model/book_model.dart';
 import 'package:my_books_app/features/home/presentation/views/widgets/book_action_button.dart';
 import 'package:my_books_app/features/home/presentation/views/widgets/book_details_appbar.dart';
 import 'package:my_books_app/features/home/presentation/views/widgets/book_item.dart';
@@ -8,8 +9,8 @@ import 'package:my_books_app/features/home/presentation/views/widgets/rating_ite
 import 'package:my_books_app/features/home/presentation/views/widgets/similar_books_listview.dart';
 
 class BookDetailsViewBody extends StatelessWidget {
-  const BookDetailsViewBody({super.key});
-
+  const BookDetailsViewBody({super.key, required this.book});
+  final BookModel book;
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -26,27 +27,30 @@ class BookDetailsViewBody extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: width * 0.25),
-                  child: const BookItem(
-                    imageUrl:
-                        'https://www.bing.com/images/search?view=detailV2&ccid=ViMTSkFf&id=B9628CAF1EB604A3D4F765EFCCC327D093AB02CD&thid=OIP.ViMTSkFf3jMZv9DLBDvUlQHaEw&mediaurl=https%3A%2F%2Ffnfcrew.com%2Fopengraph%2FRD914FB0-A74-N0AB1-DF47-O01DDF2D-M5AB5.jpg&cdnurl=https%3A%2F%2Fth.bing.com%2Fth%2Fid%2FR.5623134a415fde3319bfd0cb043bd495%3Frik%3DzQKrk9Anw8zvZQ%26pid%3DImgRaw%26r%3D0&exph=1233&expw=1920&q=random+url+image&simid=608007799081205946&FORM=IRPRST&ck=F03D013954507E42E2856C8D9924C415&selectedIndex=9&itb=0&cw=966&ch=849&ajaxhist=0&ajaxserp=0',
+                  child: BookItem(
+                    imageUrl: book.volumeInfo.imageLinks?.thumbnail ?? '',
                   ),
                 ),
                 const SizedBox(
                   height: 30,
                 ),
-                const Text('Harry Potter', style: Styles.textStyle30),
                 Text(
-                  'Rydytard data',
+                  book.volumeInfo.title!,
+                  style: Styles.textStyle30,
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  book.volumeInfo.authors?[0] ?? 'no author',
                   style: Styles.textStyle18.copyWith(
                       fontStyle: FontStyle.italic, color: Colors.grey),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                const RatingItem(
+                RatingItem(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  rating: 4,
-                  count: 300,
+                  rating: book.volumeInfo.averageRating ?? 0,
+                  count: book.volumeInfo.ratingsCount ?? 0,
                 ),
                 SizedBox(
                   height: 40,
@@ -68,7 +72,9 @@ class BookDetailsViewBody extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                SisnilarBookslistview(),
+                SisnilarBookslistview(
+                  book: book,
+                ),
                 SizedBox(
                   height: 40,
                 )
