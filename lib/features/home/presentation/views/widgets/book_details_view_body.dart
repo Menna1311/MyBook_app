@@ -7,6 +7,7 @@ import 'package:my_books_app/features/home/presentation/views/widgets/book_detai
 import 'package:my_books_app/features/home/presentation/views/widgets/book_item.dart';
 import 'package:my_books_app/features/home/presentation/views/widgets/rating_item.dart';
 import 'package:my_books_app/features/home/presentation/views/widgets/similar_books_listview.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BookDetailsViewBody extends StatelessWidget {
   const BookDetailsViewBody({super.key, required this.book});
@@ -55,7 +56,22 @@ class BookDetailsViewBody extends StatelessWidget {
                 SizedBox(
                   height: 40,
                 ),
-                const BookActionButton(),
+                BookActionButton(
+                  book: book,
+                  onPressed: () async {
+                    if (book.volumeInfo.previewLink != null) {
+                      Uri uri = Uri.parse(book.volumeInfo.previewLink!);
+                      if (await canLaunchUrl(uri)) {
+                        await launchUrl(uri);
+                      } else {
+                        // Handle the case where the URL cannot be launched
+                        print("Could not launch URL");
+                      }
+                    } else {
+                      print("No preview link available");
+                    }
+                  },
+                ),
                 Expanded(
                   child: SizedBox(
                     height: 40,

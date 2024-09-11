@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:my_books_app/core/utils/styles.dart';
+import 'package:my_books_app/features/home/data/models/book_model/book_model.dart';
 
 class BookActionButton extends StatelessWidget {
   const BookActionButton({
     super.key,
+    this.onPressed,
+    required this.book,
   });
-
+  final void Function()? onPressed;
+  final BookModel book;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -14,7 +18,7 @@ class BookActionButton extends StatelessWidget {
         children: [
           Expanded(
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: onPressed,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 shape: const RoundedRectangleBorder(
@@ -34,7 +38,7 @@ class BookActionButton extends StatelessWidget {
           ),
           Expanded(
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: onPressed,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.deepOrange,
                 shape: const RoundedRectangleBorder(
